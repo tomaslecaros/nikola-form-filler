@@ -1,0 +1,9 @@
+{
+    "name_field": "input_1.3",
+    "email_field": "input_2",
+    "phone_field": "input_5",
+    "address_field": "input_20",
+    "installation_type_dropdown": "input_24",
+    "slider_input": "input_27",
+    "found_us_dropdown": "input_34"
+}

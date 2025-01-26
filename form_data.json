@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Juan Pérez",
+        "email": "juan.perez@example.com",
+        "phone": "123456789",
+        "address": "Los ceibos 19, Calera de Tango, Chile",
+        "installation_type": "Techo",
+        "found_us": "Instagram",
+        "file_path": "Examples of receipts\\pregunta 1.jpg",
+        "desired_value": 100000
+    },
+    {
+        "name": "Ana Gómez",
+        "email": "ana.gomez@example.com",
+        "phone": "987654321",
+        "address": "Avenida Siempre Viva 742, Springfield",
+        "installation_type": "Suelo",
+        "found_us": "Facebook",
+        "file_path": "Examples of receipts\\pregunta 2.jpg",
+        "desired_value": 200000
+    },
+    {
+        "name": "Carlos López",
+        "email": "carlos.lopez@example.com",
+        "phone": "456123789",
+        "address": "Calle Falsa 123, Gotham City",
+        "installation_type": "Carport",
+        "found_us": "Google",
+        "file_path": "Examples of receipts\\pregunta 2.jpg",
+        "desired_value": 150000
+    }
+]
