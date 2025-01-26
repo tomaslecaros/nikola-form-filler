@@ -1,13 +1,7 @@
 from selenium.webdriver.common.by import By
 
-def update_slider(driver, desired_value):
-    """
-    Actualiza el valor del slider en la página web.
-    :param driver: Instancia del navegador Selenium.
-    :param desired_value: Valor deseado al que se debe ajustar el slider.
-    """
+def monthly_average_account(driver, desired_value):
     desired_value_formatted = f"${desired_value:,}".replace(",", ".")  # Formatear el número como string para JS
-
     # Script para ejecutar en el navegador
     script = f"""
     var slider = document.querySelector('#gfrs_rangeslider_28 .noUi-handle');
@@ -36,4 +30,3 @@ def update_slider(driver, desired_value):
     # Verificar y devolver el nuevo valor del slider
     slider_value = driver.find_element(By.CLASS_NAME, "noUi-handle").get_attribute("aria-valuenow")
     tooltip_value = driver.find_element(By.CLASS_NAME, "noUi-tooltip").text
-    return slider_value, tooltip_value

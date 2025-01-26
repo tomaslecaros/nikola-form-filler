@@ -3,7 +3,11 @@
     "email_field": "input_2",
     "phone_field": "input_5",
     "address_field": "input_20",
-    "installation_type_dropdown": "input_24",
+    "installation_type": "input_24",
+    "roof_type": "input_25",
+    "roof_type_detail": "input_26",
+    "other_installation_detail": "input_29",
     "slider_input": "input_27",
-    "found_us_dropdown": "input_34"
+    "found_us_dropdown": "input_34",
+    "submit_button": "gform_submit_button_1"
 }
