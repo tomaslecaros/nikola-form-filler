@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from functions.monthly_average_account import monthly_average_account
 from functions.installation_type import handle_installation_type
-from functions.form_utils import fill_text_field, select_dropdown, upload_file
+from functions.form_utils import fill_text_field, select_dropdown, upload_file, fill_address_field
 import time
 
 # Variable global para determinar si se envía el formulario o no
@@ -29,28 +29,12 @@ def process_case(driver, case, locators):
     fill_text_field(driver, locators["name_field"], case["name"])
     fill_text_field(driver, locators["email_field"], case["email"])
     fill_text_field(driver, locators["phone_field"], case["phone"])
-    
-    # Dirección
-    fill_text_field(driver, locators["address_field"], case["address"])
-    address_field = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.NAME, locators["address_field"]))
-    )
-    time.sleep(1)  # Esperar a que se carguen las sugerencias
-    address_field.send_keys(Keys.ARROW_DOWN)
-    address_field.send_keys(Keys.ENTER)
-
-    # Tipo de Instalación
+    fill_address_field(driver, locators["address_field"], case["address"])
     handle_installation_type(driver, case, locators)
-
-    # Promedio mensual de cuenta
     monthly_average_account(driver, case["desired_value"])
-
-    # Cómo nos encontraste
     select_dropdown(driver, locators["found_us_dropdown"], case["found_us"])
+    upload_file(driver, locators["slider_input"], case["file_path"])
 
-    # Subir archivo
-    file_path = os.path.abspath(case["file_path"])
-    upload_file(driver, locators["slider_input"], file_path)
 
     # Enviar formulario si submit_form es True
     if submit_form:
@@ -76,7 +60,6 @@ def main():
         for case in FORM_CASES:
             time.sleep(2)
             process_case(driver, case, LOCATORS)
-            # Esperar un momento antes del siguiente caso
             time.sleep(2)
     finally:
         # Cerrar el navegador después de procesar todos los casos

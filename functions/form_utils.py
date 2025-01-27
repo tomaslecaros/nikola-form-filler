@@ -1,9 +1,13 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+import os
 
 def fill_text_field(driver, locator, value):
+
     """
     Limpia y rellena un campo de texto.
 
@@ -32,16 +36,56 @@ def select_dropdown(driver, locator, value):
     )
     Select(dropdown).select_by_visible_text(value)
 
-def upload_file(driver, locator, file_path):
+def upload_file(driver, locator, relative_file_path):
     """
     Sube un archivo a través de un input type="file".
 
     Args:
         driver (WebDriver): Instancia de Selenium WebDriver.
         locator (str): Nombre del campo en el DOM.
-        file_path (str): Ruta completa al archivo a subir.
+        relative_file_path (str): Ruta relativa del archivo a subir.
     """
+    # Convertir la ruta relativa a absoluta
+    file_path = os.path.abspath(relative_file_path)
+
+    # Esperar a que el campo de archivo esté presente
     file_input = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.NAME, locator))
     )
+
+    # Subir el archivo
     file_input.send_keys(file_path)
+
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+import time
+
+def fill_address_field(driver, field_name, address):
+    """
+    Rellena el campo de dirección, espera a que aparezcan sugerencias y selecciona la primera opción.
+
+    Args:
+        driver (WebDriver): Instancia de Selenium WebDriver.
+        field_name (str): Nombre del campo de dirección (atributo NAME).
+        address (str): Dirección a ingresar.
+    """
+    # Esperar a que el campo sea visible y clickeable
+    address_field = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.NAME, field_name))
+    )
+
+    # Limpiar y rellenar el campo
+    address_field.clear()
+    address_field.send_keys(address)
+
+    # Esperar un momento para que se carguen las sugerencias
+    time.sleep(2)
+
+    # Seleccionar la primera sugerencia
+    address_field.send_keys(Keys.ARROW_DOWN)
+    address_field.send_keys(Keys.ENTER)
+
+

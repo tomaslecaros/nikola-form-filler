@@ -1,7 +1,22 @@
 from selenium.webdriver.common.by import By
 
 def monthly_average_account(driver, desired_value):
-    desired_value_formatted = f"${desired_value:,}".replace(",", ".")  # Formatear el número como string para JS
+    """
+    Args:
+        driver (WebDriver): Instancia de Selenium WebDriver.
+        desired_value (int): Valor deseado para el slider.
+    """
+    # Ajustar el valor si está fuera del rango permitido
+    if desired_value < 0:
+        print(f"Valor deseado {desired_value} menor a 0, ajustando a 0.")
+        desired_value = 0
+    elif desired_value > 1000000:
+        print(f"Valor deseado {desired_value} mayor a 1,000,000, ajustando a 1,000,000.")
+        desired_value = 1000000
+
+    # Formatear el número para el JavaScript
+    desired_value_formatted = f"${desired_value:,}".replace(",", ".")  # Formato chileno para separadores
+
     # Script para ejecutar en el navegador
     script = f"""
     var slider = document.querySelector('#gfrs_rangeslider_28 .noUi-handle');
@@ -16,8 +31,6 @@ def monthly_average_account(driver, desired_value):
     inputHidden.value = '{desired_value}';
     connectBar.style.transform = 'scale({desired_value / 1000000}, 1)';
     tooltip.innerHTML = '{desired_value_formatted}';  // Actualizar el contenido del tooltip
-
-    // Agregar información al noUi-touch-area (opcional)
     touchArea.setAttribute('data-value', '{desired_value}');
 
     // Log de prueba
@@ -27,6 +40,3 @@ def monthly_average_account(driver, desired_value):
     # Ejecutar el script en el navegador
     driver.execute_script(script)
 
-    # Verificar y devolver el nuevo valor del slider
-    slider_value = driver.find_element(By.CLASS_NAME, "noUi-handle").get_attribute("aria-valuenow")
-    tooltip_value = driver.find_element(By.CLASS_NAME, "noUi-tooltip").text
