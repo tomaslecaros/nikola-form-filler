@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from functions.monthly_average_account import monthly_average_account
 from functions.installation_type import handle_installation_type
-from functions.form_utils import fill_text_field, select_dropdown, upload_file, fill_address_field
+from functions.form_utils import fill_text_field, select_dropdown, upload_file, fill_address_field, send_form
 import time
 
 # Variable global para determinar si se envía el formulario o no
@@ -38,10 +38,8 @@ def process_case(driver, case, locators):
 
     # Enviar formulario si submit_form es True
     if submit_form:
-        submit_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, locators["submit_button"])))
-        submit_button.click()
-        print("Formulario enviado con éxito")
+        send_form(driver, locators["submit_button"])
+        print("El formulario fue enviado correctamente.")
 
 
 def main():

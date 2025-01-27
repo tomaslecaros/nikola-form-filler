@@ -56,13 +56,6 @@ def upload_file(driver, locator, relative_file_path):
     # Subir el archivo
     file_input.send_keys(file_path)
 
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
-import time
-
 def fill_address_field(driver, field_name, address):
     """
     Rellena el campo de dirección, espera a que aparezcan sugerencias y selecciona la primera opción.
@@ -87,5 +80,22 @@ def fill_address_field(driver, field_name, address):
     # Seleccionar la primera sugerencia
     address_field.send_keys(Keys.ARROW_DOWN)
     address_field.send_keys(Keys.ENTER)
+    
+def send_form(driver, submit_button_id):
+    """
+    Envía el formulario haciendo clic en el botón de envío.
+
+    Args:
+        driver (WebDriver): Instancia de Selenium WebDriver.
+        submit_button_id (str): ID del botón de envío en el formulario.
+    """
+    # Esperar a que el botón de envío sea interactuable
+    submit_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, submit_button_id))
+    )
+
+    # Hacer clic en el botón de envío
+    submit_button.click()
+    print("Formulario enviado con éxito.")
 
 

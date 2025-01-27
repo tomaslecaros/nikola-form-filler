@@ -89,14 +89,9 @@ Si se quiere enviar los formulario, es deccir, presionar el botón "Cotiza aquí
 
 1. El programa utiliza Selenium para automatizar el llenado de formularios en la página `https://nikola.cl/empecemos`.
 2. Procesa cada caso definido en `form_data.json` y completa los campos según los datos proporcionados.
-3. Las funciones auxiliares están organizadas en la carpeta `funciones` para manejar tareas específicas:
-   - **`fill_text_field`**: Rellena campos de texto.
-   - **`select_dropdown`**: Selecciona opciones de dropdown.
-   - **`upload_file`**: Sube archivos.
-   - **`handle_installation_type`**: Gestiona la selección de tipo de instalación ya que dependiendo de que se seleccione pueden aparecer mas dropdowns o inputs de texto.
-   - **`update_slider`**: Ajusta el valor del slider según el valor deseado.
-4. Las boletas utilizadas en este programa son imágenes de prueba incluidas para mostrar de manera práctica cómo se implementa la carga de archivos.
-5. Después de completar el formulario, el navegador se cierra automáticamente o envia el formulario dependiendo de si se desea.
+
+3. Las boletas utilizadas en este programa son imágenes de prueba incluidas para mostrar de manera práctica cómo se implementa la carga de archivos.
+4. Después de completar el formulario, el navegador se cierra automáticamente o envia el formulario dependiendo de si se desea.
 
 ---
 
